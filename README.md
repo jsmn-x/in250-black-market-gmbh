@@ -1,0 +1,21 @@
+# Galactic Code Atlas
+
+Dieses Repository enthaelt Daten, Dokumentationen und Projektstrukturen.
+Die Projektstruktur sowie die Dokumentationen wurden von mir erfasst.
+
+![My Skills in Git](docs/woman-smiling-meme-10.jpg)
+
+# Dokumentation
+
+- [Verzeichnisstruktur](docs/01_verzeichnisstruktur.md)
+
+## Tasks
+
+### Abgeschlossen
+- [x] Verzeichnisstruktur
+- [x] Dokumentation erstellt
+- [x] Hauptseite erstellt
+
+### Offen
+- [ ] Weitere Dokumentation
+- [ ] Projektbeschreibung erweitern
