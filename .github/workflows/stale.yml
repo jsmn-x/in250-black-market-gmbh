@@ -1,0 +1,32 @@
+name: Stale Issues and Pull Requests
+
+on:
+  schedule:
+    - cron: "0 1 * * *"
+  workflow_dispatch:
+
+permissions:
+  issues: write
+  pull-requests: write
+
+jobs:
+  stale:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Mark stale issues and pull requests
+        uses: actions/stale@v10
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+
+          days-before-stale: 30
+          days-before-close: 7
+
+          stale-issue-label: stale
+          stale-pr-label: stale
+
+          stale-issue-message: "Dieses Issue wurde automatisch als veraltet markiert, da es seit 30 Tagen keine Aktivität gab. Wenn weiterhin Bedarf besteht, kommentiere bitte hier."
+          close-issue-message: "Dieses Issue wurde automatisch geschlossen, da es nach der Markierung als veraltet weitere 7 Tage keine Aktivität gab."
+
+          stale-pr-message: "Dieser Pull Request wurde automatisch als veraltet markiert, da es seit 30 Tagen keine Aktivität gab. Wenn weiterhin Bedarf besteht, kommentiere bitte hier."
+          close-pr-message: "Dieser Pull Request wurde automatisch geschlossen, da er nach der Markierung als veraltet weitere 7 Tage keine Aktivität gab."
