@@ -3,7 +3,7 @@
 Dieses Repository enthaelt Daten, Dokumentationen und Projektstrukturen.
 Die Projektstruktur sowie die Dokumentationen wurden von mir erfasst.
 
-![My Skills in Git](docs/woman-smiling-meme-10.jpg)
+![How Github is](docs/magic.jpg)
 
 # Dokumentation
 
