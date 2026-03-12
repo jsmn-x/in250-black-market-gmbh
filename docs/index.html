@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Software Sternensystem</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<svg id="network" viewBox="0 0 800 600">
+
+    <!-- Orbit Ringe -->
+    <circle class="orbit" cx="400" cy="300" r="120"></circle>
+    <circle class="orbit" cx="400" cy="300" r="210"></circle>
+
+    <!-- Linien -->
+    <line id="l1" x1="400" y1="300" x2="250" y2="200"></line>
+    <line id="l2" x1="400" y1="300" x2="550" y2="200"></line>
+    <line id="l3" x1="400" y1="300" x2="400" y2="450"></line>
+    <line id="l4" x1="400" y1="300" x2="250" y2="380"></line>
+    <line id="l5" x1="400" y1="300" x2="550" y2="380"></line>
+
+    <!-- Zentrum -->
+    <circle id="nMerge" class="main-node"
+            cx="400" cy="300" r="26"
+            data-name="Merge"
+            data-desc="Branches zusammenführen – hier entsteht die finale Projektgeschichte.">
+    </circle>
+
+    <!-- Innerer Orbit -->
+
+    <circle id="nPush" class="main-node"
+            cx="250" cy="200" r="18"
+            data-name="Push"
+            data-desc="Lokale Commits ins Remote Repository hochladen.">
+    </circle>
+
+    <circle id="nPR" class="main-node"
+            cx="550" cy="200" r="18"
+            data-name="Pull Request"
+            data-desc="Code zur Überprüfung einreichen.">
+    </circle>
+
+    <circle id="nRelease" class="main-node"
+            cx="400" cy="450" r="18"
+            data-name="Release"
+            data-desc="Neue Version veröffentlichen.">
+    </circle>
+
+    <circle id="nCommit" class="main-node"
+            cx="250" cy="380" r="18"
+            data-name="Commit"
+            data-desc="Momentaufnahme der Änderungen erstellen.">
+    </circle>
+
+    <circle id="nBranch" class="main-node"
+            cx="550" cy="380" r="18"
+            data-name="Branch"
+            data-desc="Parallele Entwicklungslinie erstellen.">
+    </circle>
+
+</svg>
+
+<div id="tooltip"></div>
+
+<script>
+
+    const svg = document.getElementById("network");
+    const tooltip = document.getElementById("tooltip");
+
+
+    const linesMap = {
+
+        nPush:["l1"],
+        nPR:["l2"],
+        nRelease:["l3"],
+        nCommit:["l4"],
+        nBranch:["l5"]
+
+    };
+
+
+    function attachHover(node){
+
+        node.addEventListener("mouseenter",()=>{
+
+            tooltip.innerHTML =
+                "<b>"+node.dataset.name+"</b><br>"+node.dataset.desc;
+
+            tooltip.style.display="block";
+
+            linesMap[node.id]?.forEach(id=>{
+                document.getElementById(id).classList.add("active-line");
+            });
+
+        });
+
+
+        node.addEventListener("mousemove",e=>{
+
+            tooltip.style.left = e.clientX+12+"px";
+            tooltip.style.top = e.clientY+12+"px";
+
+        });
+
+
+        node.addEventListener("mouseleave",()=>{
+
+            tooltip.style.display="none";
+
+            linesMap[node.id]?.forEach(id=>{
+                document.getElementById(id).classList.remove("active-line");
+            });
+
+        });
+
+    }
+
+
+    svg.querySelectorAll("circle").forEach(attachHover);
+
+
+
+    /* -------- Orbit 2 Nodes -------- */
+
+    const orbitNodes = [
+
+        { name:"Testing",
+            desc:"Automatisierte Tests sichern Funktionalität.",
+            angle:40 },
+
+        { name:"Code Review",
+            desc:"Kollegen prüfen Code vor dem Merge.",
+            angle:80 },
+
+        { name:"CI/CD",
+            desc:"Automatische Builds, Tests und Deployments.",
+            angle:120 },
+
+        { name:"Docs",
+            desc:"Dokumentation hält Wissen langfristig fest.",
+            angle:200 },
+
+        { name:"Deployment",
+            desc:"Software wird in Produktionsumgebung ausgeliefert.",
+            angle:240 },
+
+        { name:"Monitoring",
+            desc:"Systemzustand und Fehler im Betrieb überwachen.",
+            angle:300 }
+
+    ];
+
+
+    const centerX = 400;
+    const centerY = 300;
+    const orbitRadius = 210;
+
+
+    orbitNodes.forEach(node=>{
+
+        const rad = node.angle * Math.PI/180;
+
+        const x = centerX + Math.cos(rad)*orbitRadius;
+        const y = centerY + Math.sin(rad)*orbitRadius;
+
+        const c = document.createElementNS(
+            "http://www.w3.org/2000/svg","circle"
+        );
+
+        c.setAttribute("cx",x);
+        c.setAttribute("cy",y);
+        c.setAttribute("r",12);
+        c.setAttribute("class","side-node");
+
+        c.dataset.name=node.name;
+        c.dataset.desc=node.desc;
+
+        svg.appendChild(c);
+
+        attachHover(c);
+
+    });
+
+
+    /* -------- Random Sterne -------- */
+
+    const anecdotes = [
+
+        "Git remembers the lies you told yourself yesterday.",
+        "Branches diverge; history never dies.",
+        "Merge conflicts are disagreements written in code.",
+        "A commit is a promise to your future self.",
+        "Pull requests are polite screams for attention.",
+        "Force pushing is digital hubris.",
+        "A stale branch is a graveyard of abandoned dreams.",
+        "Reverting is time travel with regrets.",
+        "Commit messages are tiny postcards from the past.",
+        "GitHub stars are applause in a silent room.",
+        "Linus Torvalds built a time machine for developers and then told them to fight their own battles.",
+        "Debugging is forensic psychology for machines.",
+        "Memory leaks are tiny, slow digital hemorrhages.",
+        "Race conditions are chaos disguised as logic.",
+        "Logs never forget.",
+        "Everything fails eventually; backups are hope in practice.",
+        "Ein Compiler ist ein Richter ohne Gnade.",
+        "Prozesse schlafen, warten und manchmal sterben sie.",
+        "Refactoring ist kontrollierte Archäologie.",
+        "Continuous integration is panic scheduled in cron."
+
+    ];
+
+    const width=800;
+    const height=600;
+    const safeRadius=150;
+
+
+    anecdotes.forEach(text=>{
+
+        let x,y,dist;
+
+        do{
+
+            x=Math.random()*width;
+            y=Math.random()*height;
+
+            const dx=x-centerX;
+            const dy=y-centerY;
+
+            dist=Math.sqrt(dx*dx+dy*dy);
+
+        }while(dist<safeRadius);
+
+
+        const star=document.createElementNS(
+            "http://www.w3.org/2000/svg","circle"
+        );
+
+        star.setAttribute("cx",x);
+        star.setAttribute("cy",y);
+        star.setAttribute("r",4);
+        star.setAttribute("class","anecdote");
+
+        star.dataset.name="Software Thought";
+        star.dataset.desc=text;
+
+        svg.appendChild(star);
+
+        attachHover(star);
+
+    });
+
+</script>
+
+</body>
+</html>
