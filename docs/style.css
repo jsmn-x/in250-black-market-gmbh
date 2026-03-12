@@ -1,0 +1,148 @@
+body{
+
+  margin:0;
+  overflow:hidden;
+  background:black;
+  font-family:sans-serif;
+
+}
+
+
+/* Orbit Ringe */
+
+.orbit{
+
+  fill:none;
+  stroke:rgba(255,255,255,0.1);
+  stroke-width:1;
+
+}
+
+
+/* Tooltip */
+
+#tooltip{
+
+  position:absolute;
+  background:rgba(0,0,0,0.9);
+  color:white;
+
+  padding:8px 12px;
+
+  border-radius:6px;
+
+  pointer-events:none;
+  display:none;
+
+  font-size:14px;
+  max-width:240px;
+
+  line-height:1.4;
+
+  box-shadow:0 0 10px rgba(255,255,255,0.6);
+
+}
+
+
+/* Linien */
+
+line{
+
+  stroke:rgba(255,255,255,0.15);
+  stroke-width:2;
+  opacity:0.2;
+
+  transition:all 0.25s;
+
+}
+
+.active-line{
+
+  opacity:1;
+  stroke:white;
+  stroke-width:3;
+
+}
+
+
+/* Nodes */
+
+circle{
+
+  cursor:pointer;
+  transition:all 0.25s;
+
+}
+
+
+/* zentrale Git Planeten */
+
+.main-node{
+
+  fill:#66ccff;
+  stroke:white;
+  stroke-width:3;
+
+  filter:drop-shadow(0 0 12px #66ccff);
+
+}
+
+
+/* Engineering Planeten */
+
+.side-node{
+
+  fill:#ff99ff;
+  stroke:white;
+  stroke-width:2;
+
+  filter:drop-shadow(0 0 8px #ff99ff);
+
+}
+
+
+/* Sterne */
+
+.anecdote{
+
+  fill:white;
+  opacity:0.6;
+
+  animation:twinkle 3s infinite alternate;
+
+}
+
+/* Animation pausieren wenn Maus im Sternensystem ist */
+
+#network:hover .anecdote{
+
+  animation-play-state: paused;
+
+}
+
+
+/* Stern Animation */
+
+@keyframes twinkle{
+
+  from{
+    opacity:0.2;
+    transform:scale(0.8);
+  }
+
+  to{
+    opacity:1;
+    transform:scale(1.2);
+  }
+
+}
+
+
+/* Hover Effekt */
+
+circle:hover{
+
+  stroke-width:4;
+  filter:drop-shadow(0 0 10px white);
+
+}

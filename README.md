@@ -9,7 +9,9 @@ Die Projektstruktur sowie die Dokumentationen wurden von mir erfasst.
 
 - [Verzeichnisstruktur](docs/01_verzeichnisstruktur.md)
 - [Branch-Strategie](docs/02_branch_strategie.md)
-- 
+
+## Links
+-[GitHub Page Website](https://jsmn-x.github.io/in250-black-market-gmbh/)
 
 ## Tasks
 
